@@ -46,6 +46,9 @@
 			"indentStyle": "tab",
 			"lineWidth": 80,
 			"quoteProperties": "asNeeded"
+		},
+		"linter": {
+			"enabled": true
 		}
 	}
 }
