@@ -1,5 +1,10 @@
+import { ArticleList } from '@/features/articleList'
+
 export default function Page() {
     return (
-        <div>page</div>
+        <>
+            <ArticleList />
+
+        </>
     )
 }
