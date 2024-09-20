@@ -1,10 +1,9 @@
-import { ArticleList } from '@/features/articleList'
+import { ArticleList } from "@/features/articleList";
 
 export default function Page() {
-    return (
-        <>
-            <ArticleList />
-
-        </>
-    )
+	return (
+		<>
+			<ArticleList />
+		</>
+	);
 }

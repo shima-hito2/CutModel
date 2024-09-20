@@ -1,15 +1,13 @@
-import Container from '@mui/material/Container'
+import Container from "@mui/material/Container";
 
 export default function Layout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <>
-      <Container maxWidth='md'>
-        {children}
-      </Container>
-    </>
-  )
+	return (
+		<>
+			<Container maxWidth="md">{children}</Container>
+		</>
+	);
 }
