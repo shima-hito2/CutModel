@@ -12,7 +12,7 @@ export const ArticleSearchFilter: FC = () => {
 		<>
 			<Box
 				sx={{
-					width: "90%",
+					width: "calc(100% - 64px)",
 					display: "flex",
 					backgroundColor: "#FFF",
 					m: 2,

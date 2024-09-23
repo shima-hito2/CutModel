@@ -13,7 +13,7 @@ export const ArticleItem: FC = () => {
 					m: 2,
 					p: 2,
 					borderRadius: 2,
-					width: "90%",
+					width: "calc(100% - 64px)",
 				}}
 			>
 				{/* ユーザー情報 */}
