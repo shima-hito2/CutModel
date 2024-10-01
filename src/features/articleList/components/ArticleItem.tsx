@@ -1,10 +1,60 @@
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+/* eslint-disable @next/next/no-img-element */
+import type {
+	ArticleItemDetail,
+	ArticleItem as TArticleItem,
+} from "@/app/type/articleItem";
+import notFoundImage from "@/public/no_images.jpg";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import type { FC } from "react";
+import { type FC, useEffect, useState } from "react";
 
-export const ArticleItem: FC = () => {
+type Props = {
+	article: TArticleItem;
+};
+
+export const ArticleItem: FC<Props> = (props: Props) => {
+	const { article } = props;
+
+	const [a, setA] = useState(article);
+
+	const checkArticle = (argArray: TArticleItem) => {
+		const newDetails: ArticleItemDetail[] = [];
+		for (const item2 of argArray.details) {
+			const img = new Image();
+			img.src = item2.imageUrl;
+			img.onload = () => {
+				newDetails.push({
+					imageUrl: item2.imageUrl,
+					title: item2.title,
+					price: item2.price,
+				});
+			};
+			img.onerror = () => {
+				newDetails.push({
+					imageUrl: notFoundImage.src,
+					title: item2.title,
+					price: item2.price,
+				});
+			};
+		}
+		const result: TArticleItem = {
+			user: {
+				id: argArray.user.id,
+				imageUrl: argArray.user.imageUrl,
+				name: argArray.user.name,
+				biography: argArray.user.biography,
+				strengths: argArray.user.strengths,
+			},
+			details: newDetails,
+		};
+		return result;
+	};
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		console.log(checkArticle(article));
+		setA(checkArticle(article));
+	}, []);
 	return (
 		<>
 			<Box
@@ -30,53 +80,44 @@ export const ArticleItem: FC = () => {
 						/>
 					</Box>
 					<Box sx={{ width: "90%" }}>
-						<Typography sx={{ fontSize: 14 }}>テスト店舗</Typography>
-						<Typography sx={{ fontSize: 20 }}>テスト 太郎</Typography>
+						<Typography sx={{ fontSize: 20 }}>{article.user.name}</Typography>
 						<Typography sx={{ fontSize: 12, color: "#00000060" }}>
-							アシスタント/研修2年
+							{article.user.biography}
 						</Typography>
-						<Box sx={{ display: "flex" }}>
-							<ChatBubbleIcon sx={{ fontSize: 18, color: "#0d92c3" }} />
-							<Typography sx={{ fontSize: 12, color: "#00000060" }}>
-								100
-							</Typography>
-							<FavoriteIcon sx={{ fontSize: 18, color: "#fd4a5b", pl: 1 }} />
-							<Typography sx={{ fontSize: 12, color: "#00000060" }}>
-								50
-							</Typography>
-						</Box>
 					</Box>
 				</Box>
 				{/* 募集内容 */}
 				<Box sx={{ py: 2 }}>
-					<Typography
-						sx={{
-							fontSize: 14,
-							fontWeight: "bold",
-							overflow: "hidden",
-							textOverflow: "ellipsis",
-							whiteSpace: "nowrap",
-						}}
-					>
-						テストタイトルテストタイトルテストタイトルテストタイトルテストタイトルテストタイトルテストタイトルテストタイトルテストタイトル
-					</Typography>
-					<Typography
-						sx={{
-							fontSize: 12,
-							overflow: "hidden",
-							WebkitBoxOrient: "vertical",
-							WebkitLineClamp: 3,
-							display: "-webkit-box",
-						}}
-					>
-						テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容テスト募集内容
-					</Typography>
+					{a.details.map((item) => (
+						<Box key={item.title} sx={{ display: "flex" }}>
+							<Box>
+								<img
+									src={item.imageUrl}
+									width={40}
+									height={40}
+									alt="articleImage"
+								/>
+								<Box>
+									<Typography>{item.title}</Typography>
+									<Typography>{item.price}</Typography>
+									<Typography>aaaaaaaaaaaaaaaaaaaaa</Typography>
+								</Box>
+							</Box>
+						</Box>
+					))}
 				</Box>
 				{/* 詳細ボタン */}
 				<Box
 					sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
 				>
-					<Button variant="contained">詳細</Button>
+					<Button
+						variant="contained"
+						onClick={() => {
+							console.log(a);
+						}}
+					>
+						詳細
+					</Button>
 				</Box>
 			</Box>
 		</>
