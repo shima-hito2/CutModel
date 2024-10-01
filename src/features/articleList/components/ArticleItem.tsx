@@ -86,6 +86,11 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 								style={{
 									borderRadius: "6px 0 0 6px",
 								}}
+								// onError="this.onerror=null;this.src='http://www.tenman.info/images/pen.jpg';"
+								onError={(event) => {
+									event.target.src = "https://default-image-link-goes-here";
+									event.onerror = null;
+								}}
 								alt=""
 							/> */}
 							<Box
