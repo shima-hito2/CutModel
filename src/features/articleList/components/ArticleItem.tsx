@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
-import { Image } from "@mui/icons-material";
 import PlaceIcon from "@mui/icons-material/Place";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
