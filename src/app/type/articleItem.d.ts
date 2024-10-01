@@ -1,6 +1,7 @@
 export type ArticleItem = {
 	user: ArticleItemsUser;
 	details: ArticleItemDetail[];
+	places: string[];
 };
 
 export type ArticleItemsUser = {

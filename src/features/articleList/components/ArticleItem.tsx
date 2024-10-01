@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import type {
-	ArticleItemDetail,
-	ArticleItem as TArticleItem,
-} from "@/app/type/articleItem";
-import notFoundImage from "@/public/no_images.jpg";
+import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
+import { Image } from "@mui/icons-material";
+import PlaceIcon from "@mui/icons-material/Place";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { type FC, useEffect, useState } from "react";
+import type { FC } from "react";
 
 type Props = {
 	article: TArticleItem;
@@ -14,47 +12,6 @@ type Props = {
 
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
-
-	const [a, setA] = useState(article);
-
-	const checkArticle = (argArray: TArticleItem) => {
-		const newDetails: ArticleItemDetail[] = [];
-		for (const item2 of argArray.details) {
-			const img = new Image();
-			img.src = item2.imageUrl;
-			img.onload = () => {
-				newDetails.push({
-					imageUrl: item2.imageUrl,
-					title: item2.title,
-					price: item2.price,
-				});
-			};
-			img.onerror = () => {
-				newDetails.push({
-					imageUrl: notFoundImage.src,
-					title: item2.title,
-					price: item2.price,
-				});
-			};
-		}
-		const result: TArticleItem = {
-			user: {
-				id: argArray.user.id,
-				imageUrl: argArray.user.imageUrl,
-				name: argArray.user.name,
-				biography: argArray.user.biography,
-				strengths: argArray.user.strengths,
-			},
-			details: newDetails,
-		};
-		return result;
-	};
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-	useEffect(() => {
-		console.log(checkArticle(article));
-		setA(checkArticle(article));
-	}, []);
 	return (
 		<>
 			<Box
@@ -67,57 +24,120 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 				}}
 			>
 				{/* ユーザー情報 */}
-				<Box sx={{ display: "flex" }}>
-					<Box sx={{ width: "10%", minWidth: 65, my: "auto", pr: 2 }}>
+				<Box sx={{ display: "flex", alignItems: "center" }}>
+					<Box
+						sx={{
+							width: { md: "10%", xs: "6%" },
+							minWidth: { md: 65, xs: 40 },
+							pr: 2,
+						}}
+					>
 						<Box
 							sx={{
 								borderRadius: "50%",
-								width: 65,
-								height: 65,
+								width: { md: 65, xs: 40 },
+								height: { md: 65, xs: 40 },
 								backgroundColor: "red",
 								mx: "auto",
 							}}
 						/>
 					</Box>
-					<Box sx={{ width: "90%" }}>
-						<Typography sx={{ fontSize: 20 }}>{article.user.name}</Typography>
-						<Typography sx={{ fontSize: 12, color: "#00000060" }}>
+					<Box sx={{ width: { md: "90%", xs: "94%" } }}>
+						<Typography
+							sx={{ fontSize: "clamp(16px,1.2vw,20px)", fontWeight: "bold" }}
+						>
+							{article.user.name}
+						</Typography>
+						<Typography
+							sx={{ fontSize: "clamp(8px,1.2vw,12px)", color: "#00000060" }}
+						>
 							{article.user.biography}
 						</Typography>
 					</Box>
 				</Box>
 				{/* 募集内容 */}
-				<Box sx={{ py: 2 }}>
-					{a.details.map((item) => (
-						<Box key={item.title} sx={{ display: "flex" }}>
+				<Box
+					sx={{
+						py: 2,
+						width: "100%",
+						justifyContent: "space-around",
+						display: { md: "flex" },
+					}}
+				>
+					{article.details.map((item) => (
+						<Box
+							key={item.title}
+							sx={{
+								display: "flex",
+								width: { md: "40%", xs: "100%" },
+								mb: { md: 0, xs: 2 },
+								height: { md: 80, xs: 60 },
+								border: "1px solid #00000060",
+								alignItems: "center",
+								gap: 2,
+								borderRadius: "6px",
+							}}
+						>
+							{/* TODO: 画像が読み込みエラーになった場合、バグるが対処が現状できない */}
+							{/* <img
+								src={item.imageUrl}
+								width={80}
+								height={80}
+								style={{
+									borderRadius: "6px 0 0 6px",
+								}}
+								alt=""
+							/> */}
+							<Box
+								component={"img"}
+								src={item.imageUrl}
+								sx={{
+									width: { md: 80, xs: 60 },
+									height: { md: 80, xs: 60 },
+									borderRadius: "6px 0 0 6px",
+								}}
+							/>
 							<Box>
-								<img
-									src={item.imageUrl}
-									width={40}
-									height={40}
-									alt="articleImage"
-								/>
-								<Box>
-									<Typography>{item.title}</Typography>
-									<Typography>{item.price}</Typography>
-									<Typography>aaaaaaaaaaaaaaaaaaaaa</Typography>
-								</Box>
+								<Typography sx={{ fontWeight: "bold" }}>
+									{item.title}
+								</Typography>
+								<Typography>￥{item.price}</Typography>
 							</Box>
 						</Box>
 					))}
 				</Box>
 				{/* 詳細ボタン */}
 				<Box
-					sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+					sx={{
+						width: "100%",
+						display: "flex",
+						justifyContent: "flex-end",
+					}}
 				>
 					<Button
 						variant="contained"
-						onClick={() => {
-							console.log(a);
+						sx={{
+							fontSize: "clamp(8px,1.2vw,12px)",
 						}}
 					>
 						詳細
 					</Button>
+				</Box>
+				<Box
+					sx={{
+						display: "flex",
+						color: "#00000060",
+						alignItems: "center",
+						pt: 2,
+					}}
+				>
+					<PlaceIcon sx={{ fontSize: "clamp(8px,1.2vw,1.2vw)" }} />
+					{article.places.map((item, idx) => (
+						<Typography key={item} sx={{ fontSize: "clamp(8px,1.2vw,12px)" }}>
+							{item}
+							<span>{idx !== article.places.length - 1 ? " / " : ""}</span>
+						</Typography>
+					))}
 				</Box>
 			</Box>
 		</>

@@ -1,10 +1,6 @@
 "use client";
 
-import type {
-	ArticleItemDetail,
-	ArticleItem as TArticleItem,
-} from "@/app/type/articleItem";
-import notFoundImage from "@/public/no_images.jpg";
+import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
 import { Box, Pagination } from "@mui/material";
 import type { FC } from "react";
 import { ArticleItem, ArticleSearchFilter } from "./components";
@@ -30,6 +26,7 @@ const dummyData: TArticleItem[] = [
 				price: 4200,
 			},
 		],
+		places: ["○○駅徒歩5分", "○×駅徒歩10分", "×○駅徒歩12分", "××駅徒歩15分"],
 	},
 	{
 		user: {
@@ -51,42 +48,44 @@ const dummyData: TArticleItem[] = [
 				price: 4200,
 			},
 		],
+		places: ["○○駅徒歩5分", "○×駅徒歩10分", "×○駅徒歩12分", "××駅徒歩15分"],
 	},
 ];
 
 export const ArticleList: FC = () => {
-	const checkArticle = (argArray: TArticleItem) => {
-		const newDetails: ArticleItemDetail[] = [];
-		for (const item2 of argArray.details) {
-			const img = new Image();
-			img.src = item2.imageUrl;
-			img.onload = () => {
-				newDetails.push({
-					imageUrl: item2.imageUrl,
-					title: item2.title,
-					price: item2.price,
-				});
-			};
-			img.onerror = () => {
-				newDetails.push({
-					imageUrl: notFoundImage.src,
-					title: item2.title,
-					price: item2.price,
-				});
-			};
-		}
-		const result: TArticleItem = {
-			user: {
-				id: argArray.user.id,
-				imageUrl: argArray.user.imageUrl,
-				name: argArray.user.name,
-				biography: argArray.user.biography,
-				strengths: argArray.user.strengths,
-			},
-			details: newDetails,
-		};
-		return result;
-	};
+	// TODO: 後で消す。
+	// const checkArticle = (argArray: TArticleItem) => {
+	// 	const newDetails: ArticleItemDetail[] = [];
+	// 	for (const item2 of argArray.details) {
+	// 		const img = new Image();
+	// 		img.src = item2.imageUrl;
+	// 		img.onload = () => {
+	// 			newDetails.push({
+	// 				imageUrl: item2.imageUrl,
+	// 				title: item2.title,
+	// 				price: item2.price,
+	// 			});
+	// 		};
+	// 		img.onerror = () => {
+	// 			newDetails.push({
+	// 				imageUrl: notFoundImage.src,
+	// 				title: item2.title,
+	// 				price: item2.price,
+	// 			});
+	// 		};
+	// 	}
+	// 	const result: TArticleItem = {
+	// 		user: {
+	// 			id: argArray.user.id,
+	// 			imageUrl: argArray.user.imageUrl,
+	// 			name: argArray.user.name,
+	// 			biography: argArray.user.biography,
+	// 			strengths: argArray.user.strengths,
+	// 		},
+	// 		details: newDetails,
+	// 	};
+	// 	return result;
+	// };
 
 	return (
 		<>
