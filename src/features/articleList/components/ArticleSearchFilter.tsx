@@ -23,14 +23,29 @@ export const ArticleSearchFilter: FC = () => {
 			>
 				<Box sx={{ display: "flex", alignItems: "center" }}>
 					<SearchIcon sx={{ pr: 2 }} />
-					<Typography sx={{ fontWeight: "bold" }}>検索条件</Typography>
+					<Typography
+						sx={{
+							fontWeight: "bold",
+							fontSize: "clamp(10px,1.4vw,20px)",
+							textWrap: "nowrap",
+						}}
+					>
+						検索条件
+					</Typography>
 					{searchList.map((item) => (
-						<Typography key={item} sx={{ fontSize: 12, pl: 1 }}>
+						<Typography
+							key={item}
+							sx={{ fontSize: "clamp(8px,1.4vw,12px)", pl: 1 }}
+						>
 							{item}
 						</Typography>
 					))}
 				</Box>
-				<Button variant="contained" onClick={handleOpen}>
+				<Button
+					variant="contained"
+					onClick={handleOpen}
+					sx={{ fontSize: "clamp(8px,1.2vw,12px)" }}
+				>
 					検索条件追加
 				</Button>
 			</Box>
