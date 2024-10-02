@@ -3,7 +3,8 @@ import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
 import PlaceIcon from "@mui/icons-material/Place";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import type { FC } from "react";
+import Image from "next/image";
+import { type FC, useState } from "react";
 
 type Props = {
 	article: TArticleItem;
@@ -11,6 +12,12 @@ type Props = {
 
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
+	const [firstUrl, setFirstUrl] = useState(
+		article.details.length >= 1 ? article.details[0].imageUrl : "",
+	);
+	const [secondUrl, setSecoundUrl] = useState(
+		article.details.length >= 2 ? article.details[1].imageUrl : "",
+	);
 	return (
 		<>
 			<Box
@@ -63,9 +70,49 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 						display: { md: "flex" },
 					}}
 				>
-					{article.details.map((item) => (
+					{firstUrl !== "" && (
 						<Box
-							key={item.title}
+							sx={{
+								display: "flex",
+								width: { md: "40%", xs: "100%" },
+								height: { md: 80, xs: 60 },
+								mb: { md: 0, xs: 2 },
+								border: "1px solid #00000060",
+								alignItems: "center",
+								gap: 2,
+								borderRadius: "6px",
+							}}
+						>
+							<Box
+								sx={{
+									width: { md: 80, xs: 60 },
+									height: { md: 80, xs: 60 },
+									position: "relative",
+								}}
+							>
+								<Image
+									src={firstUrl}
+									fill
+									style={{
+										borderRadius: "6px 0 0 6px",
+									}}
+									alt="Picture of the author"
+									onError={() => {
+										setFirstUrl("/no_images.jpg");
+									}}
+								/>
+							</Box>
+
+							<Box>
+								<Typography sx={{ fontWeight: "bold" }}>
+									{article.details[0].title}
+								</Typography>
+								<Typography>￥{article.details[0].price}</Typography>
+							</Box>
+						</Box>
+					)}
+					{secondUrl !== "" && (
+						<Box
 							sx={{
 								display: "flex",
 								width: { md: "40%", xs: "100%" },
@@ -77,38 +124,34 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 								borderRadius: "6px",
 							}}
 						>
-							{/* TODO: 画像が読み込みエラーになった場合、バグるが対処が現状できない */}
-							{/* <img
-								src={item.imageUrl}
-								width={80}
-								height={80}
-								style={{
-									borderRadius: "6px 0 0 6px",
-								}}
-								// onError="this.onerror=null;this.src='http://www.tenman.info/images/pen.jpg';"
-								onError={(event) => {
-									event.target.src = "https://default-image-link-goes-here";
-									event.onerror = null;
-								}}
-								alt=""
-							/> */}
 							<Box
-								component={"img"}
-								src={item.imageUrl}
 								sx={{
 									width: { md: 80, xs: 60 },
 									height: { md: 80, xs: 60 },
-									borderRadius: "6px 0 0 6px",
+									position: "relative",
 								}}
-							/>
+							>
+								<Image
+									src={secondUrl}
+									fill
+									style={{
+										borderRadius: "6px 0 0 6px",
+									}}
+									alt="Picture of the author"
+									onError={() => {
+										setSecoundUrl("/no_images.jpg");
+									}}
+								/>
+							</Box>
+
 							<Box>
 								<Typography sx={{ fontWeight: "bold" }}>
-									{item.title}
+									{article.details[1].title}
 								</Typography>
-								<Typography>￥{item.price}</Typography>
+								<Typography>￥{article.details[1].price}</Typography>
 							</Box>
 						</Box>
-					))}
+					)}
 				</Box>
 				{/* 詳細ボタン */}
 				<Box

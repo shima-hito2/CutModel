@@ -16,12 +16,12 @@ const dummyData: TArticleItem[] = [
 		},
 		details: [
 			{
-				imageUrl: "https://placehold.jp/300x200.png",
+				imageUrl: "/user1.jpg",
 				title: "募集タイトルA",
 				price: 6000,
 			},
 			{
-				imageUrl: "a",
+				imageUrl: "/a",
 				title: "募集タイトルB",
 				price: 4200,
 			},
@@ -38,12 +38,12 @@ const dummyData: TArticleItem[] = [
 		},
 		details: [
 			{
-				imageUrl: "a",
+				imageUrl: "/a",
 				title: "募集タイトルA",
 				price: 6000,
 			},
 			{
-				imageUrl: "a",
+				imageUrl: "/a",
 				title: "募集タイトルB",
 				price: 4200,
 			},
