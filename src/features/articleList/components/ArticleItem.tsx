@@ -98,8 +98,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 									}}
 									alt="Picture of the author"
 									onError={() => {
-										setFirstUrl("https://placehold.jp/300x200.png");
-										// setFirstUrl("/no_images.jpg");
+										setFirstUrl("/no_images.jpg");
 									}}
 								/>
 							</Box>
