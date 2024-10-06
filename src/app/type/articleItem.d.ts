@@ -13,6 +13,7 @@ export type ArticleItemsUser = {
 };
 
 export type ArticleItemDetail = {
+	id: string;
 	imageUrl: string;
 	title: string;
 	price: number;

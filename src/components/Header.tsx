@@ -8,11 +8,15 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import type { FC } from "react";
 
 export const Header: FC = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+	const router = useRouter();
 
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -29,9 +33,11 @@ export const Header: FC = () => {
 				sx={{ backgroundColor: "#FFF", color: "#00000080", boxShadow: "none" }}
 			>
 				<Toolbar>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						CutModel
-					</Typography>
+					<Link href={"/"} style={{ flexGrow: 1 }}>
+						<Typography variant="h6" component="div">
+							CutModel
+						</Typography>
+					</Link>
 					<div>
 						<IconButton
 							size="large"
@@ -57,8 +63,20 @@ export const Header: FC = () => {
 							open={Boolean(anchorEl)}
 							onClose={handleClose}
 						>
-							<MenuItem onClick={handleClose}>Profile</MenuItem>
-							<MenuItem onClick={handleClose}>My account</MenuItem>
+							<MenuItem
+								onClick={() => {
+									router.replace("/my-page");
+								}}
+							>
+								マイページ
+							</MenuItem>
+							<MenuItem
+								onClick={() => {
+									router.replace("/log-in");
+								}}
+							>
+								ログアウト
+							</MenuItem>
 						</Menu>
 					</div>
 				</Toolbar>

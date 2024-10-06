@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
+import Link from "next/link";
 import { type FC, useState } from "react";
 
 type Props = {
@@ -18,6 +19,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 	const [secondUrl, setSecoundUrl] = useState(
 		article.details.length >= 2 ? article.details[1].imageUrl : "",
 	);
+
 	return (
 		<>
 			<Box
@@ -71,104 +73,109 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					}}
 				>
 					{firstUrl !== "" && (
-						<Box
-							sx={{
-								display: "flex",
-								width: { md: "40%", xs: "100%" },
-								height: { md: 80, xs: 60 },
-								mb: { md: 0, xs: 2 },
-								border: "1px solid #00000060",
-								alignItems: "center",
-								gap: 2,
-								borderRadius: "6px",
-							}}
+						<Link
+							href={`/list/${article.details[0].id}`}
+							passHref
+							style={{ width: "40%" }}
+							target="_blank"
 						>
 							<Box
 								sx={{
-									width: { md: 80, xs: 60 },
+									display: "flex",
+									width: "100%",
 									height: { md: 80, xs: 60 },
-									position: "relative",
+									cursor: "pointer",
+									mb: { md: 0, xs: 2 },
+									border: "1px solid #00000060",
+									alignItems: "center",
+									gap: 2,
+									borderRadius: "6px",
+									"&:hover": {
+										opacity: "0.7",
+									},
 								}}
 							>
-								<Image
-									src={firstUrl}
-									fill
-									style={{
-										borderRadius: "6px 0 0 6px",
+								<Box
+									sx={{
+										width: { md: 80, xs: 60 },
+										height: { md: 80, xs: 60 },
+										position: "relative",
 									}}
-									alt="Picture of the author"
-									onError={() => {
-										setFirstUrl("/no_images.jpg");
-									}}
-								/>
-							</Box>
+								>
+									<Image
+										src={firstUrl}
+										fill
+										style={{
+											borderRadius: "6px 0 0 6px",
+										}}
+										alt="Picture of the author"
+										onError={() => {
+											setFirstUrl("/no_images.jpg");
+										}}
+									/>
+								</Box>
 
-							<Box>
-								<Typography sx={{ fontWeight: "bold" }}>
-									{article.details[0].title}
-								</Typography>
-								<Typography>￥{article.details[0].price}</Typography>
+								<Box>
+									<Typography sx={{ fontWeight: "bold" }}>
+										{article.details[0].title}
+									</Typography>
+									<Typography>￥{article.details[0].price}</Typography>
+								</Box>
 							</Box>
-						</Box>
+						</Link>
 					)}
 					{secondUrl !== "" && (
-						<Box
-							sx={{
-								display: "flex",
-								width: { md: "40%", xs: "100%" },
-								mb: { md: 0, xs: 2 },
-								height: { md: 80, xs: 60 },
-								border: "1px solid #00000060",
-								alignItems: "center",
-								gap: 2,
-								borderRadius: "6px",
-							}}
+						<Link
+							href={`/list/${article.details[1].id}`}
+							passHref
+							style={{ width: "40%" }}
+							target="_blank"
 						>
 							<Box
 								sx={{
-									width: { md: 80, xs: 60 },
+									display: "flex",
+									width: "100%",
+									cursor: "pointer",
+									mb: { md: 0, xs: 2 },
 									height: { md: 80, xs: 60 },
-									position: "relative",
+									border: "1px solid #00000060",
+									alignItems: "center",
+									gap: 2,
+									borderRadius: "6px",
+									"&:hover": {
+										opacity: "0.7",
+									},
 								}}
 							>
-								<Image
-									src={secondUrl}
-									fill
-									style={{
-										borderRadius: "6px 0 0 6px",
+								<Box
+									sx={{
+										width: { md: 80, xs: 60 },
+										height: { md: 80, xs: 60 },
+										position: "relative",
 									}}
-									alt="Picture of the author"
-									onError={() => {
-										setSecoundUrl("/no_images.jpg");
-									}}
-								/>
-							</Box>
+								>
+									<Image
+										src={secondUrl}
+										fill
+										style={{
+											borderRadius: "6px 0 0 6px",
+										}}
+										alt="Picture of the author"
+										onError={() => {
+											setSecoundUrl("/no_images.jpg");
+										}}
+									/>
+								</Box>
 
-							<Box>
-								<Typography sx={{ fontWeight: "bold" }}>
-									{article.details[1].title}
-								</Typography>
-								<Typography>￥{article.details[1].price}</Typography>
+								<Box>
+									<Typography sx={{ fontWeight: "bold" }}>
+										{article.details[1].title}
+									</Typography>
+									<Typography>￥{article.details[1].price}</Typography>
+								</Box>
 							</Box>
-						</Box>
+						</Link>
 					)}
-				</Box>
-				{/* 詳細ボタン */}
-				<Box
-					sx={{
-						width: "100%",
-						display: "flex",
-						justifyContent: "flex-end",
-					}}
-				>
-					<Button
-						variant="contained"
-						sx={{
-							fontSize: "clamp(8px,1.2vw,12px)",
-						}}
-					>
-						詳細
-					</Button>
 				</Box>
 				<Box
 					sx={{

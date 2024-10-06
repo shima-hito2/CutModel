@@ -16,11 +16,13 @@ const dummyData: TArticleItem[] = [
 		},
 		details: [
 			{
+				id: "A",
 				imageUrl: "/user1.jpg",
 				title: "募集タイトルA",
 				price: 6000,
 			},
 			{
+				id: "B",
 				imageUrl: "/a",
 				title: "募集タイトルB",
 				price: 4200,
@@ -32,17 +34,19 @@ const dummyData: TArticleItem[] = [
 		user: {
 			id: "2",
 			imageUrl: "",
-			name: "テスト  太郎",
-			biography: "アシスタント2年",
+			name: "テスト  次郎",
+			biography: "アシスタント4年",
 			strengths: "カットが得意です。",
 		},
 		details: [
 			{
+				id: "C",
 				imageUrl: "/a",
 				title: "募集タイトルA",
 				price: 6000,
 			},
 			{
+				id: "D",
 				imageUrl: "/a",
 				title: "募集タイトルB",
 				price: 4200,
