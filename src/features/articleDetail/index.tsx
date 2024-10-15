@@ -1,8 +1,12 @@
+"use client";
+
 import Typography from "@mui/material/Typography";
-import type { FC } from "react";
-import { Article, UserInfo } from "./components";
+import { type FC, useState } from "react";
+import { Article, ReservationDialog, UserInfo } from "./components";
 
 export const ArticleDetail: FC = () => {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<>
 			<Typography
@@ -16,7 +20,17 @@ export const ArticleDetail: FC = () => {
 			>
 				施術内容
 			</Typography>
-			<Article />
+			<Article
+				handleOpen={() => {
+					setOpen(true);
+				}}
+			/>
+			<ReservationDialog
+				open={open}
+				handleClose={() => {
+					setOpen(false);
+				}}
+			/>
 		</>
 	);
 };

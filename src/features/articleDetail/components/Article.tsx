@@ -2,7 +2,12 @@ import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import type { FC } from "react";
 
-export const Article: FC = () => {
+type Props = {
+	handleOpen: () => void;
+};
+
+export const Article: FC<Props> = (props: Props) => {
+	const { handleOpen } = props;
 	return (
 		<Box
 			sx={{
@@ -50,7 +55,9 @@ export const Article: FC = () => {
 				</Box>
 			</Box>
 			<Box sx={{ width: "100%", textAlign: "center" }}>
-				<Button variant="outlined">予約する</Button>
+				<Button variant="outlined" onClick={handleOpen}>
+					予約する
+				</Button>
 			</Box>
 		</Box>
 	);
