@@ -72,7 +72,7 @@ export const Header: FC = () => {
 							</MenuItem>
 							<MenuItem
 								onClick={() => {
-									router.replace("/log-in");
+									router.replace("/login");
 								}}
 							>
 								ログアウト
