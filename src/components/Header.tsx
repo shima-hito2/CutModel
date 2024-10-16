@@ -65,14 +65,16 @@ export const Header: FC = () => {
 						>
 							<MenuItem
 								onClick={() => {
-									router.replace("/my-page");
+									// router.replace("/my-page");
+									window.location.href = "/my-page";
 								}}
 							>
 								マイページ
 							</MenuItem>
 							<MenuItem
 								onClick={() => {
-									router.replace("/login");
+									window.location.href = "/login";
+									// router.replace("/login");
 								}}
 							>
 								ログアウト
