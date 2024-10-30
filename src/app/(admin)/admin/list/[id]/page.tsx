@@ -1,4 +1,4 @@
-import { ArticleDetail } from "@/features/user/articleDetail";
+import { ArticleDetail } from "@/features/admin/articleDetail";
 
 export default function Page() {
 	return (

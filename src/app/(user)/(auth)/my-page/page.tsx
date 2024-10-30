@@ -1,4 +1,4 @@
-import { MyPage } from "@/features/myPage";
+import { MyPage } from "@/features/common/myPage";
 
 export default function Page() {
 	return (

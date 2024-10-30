@@ -1,4 +1,4 @@
-import { ArticleList } from "@/features/articleList";
+import { ArticleList } from "@/features/user/articleList";
 
 export default function Page() {
 	return (

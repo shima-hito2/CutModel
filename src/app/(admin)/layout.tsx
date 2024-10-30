@@ -1,4 +1,4 @@
-import "./globals.css";
+import { Header } from "@/components/admin/Header";
 
 export default function Layout({
 	children,
@@ -8,7 +8,10 @@ export default function Layout({
 	return (
 		// biome-ignore lint/a11y/useHtmlLang: <explanation>
 		<html>
-			<body>{children}</body>
+			<body>
+				<Header />
+				{children}
+			</body>
 		</html>
 	);
 }
