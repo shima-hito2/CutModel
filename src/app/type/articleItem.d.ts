@@ -1,6 +1,6 @@
 export type ArticleItem = {
 	user: ArticleItemsUser;
-	details: ArticleItemDetail[];
+	details: ArticleItemDetail;
 	places: string[];
 };
 
@@ -15,6 +15,6 @@ export type ArticleItemsUser = {
 export type ArticleItemDetail = {
 	id: string;
 	imageUrl: string;
-	title: string;
+	body: string;
 	price: number;
 };

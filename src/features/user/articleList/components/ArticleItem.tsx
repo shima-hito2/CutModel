@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Box } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,11 +14,8 @@ type Props = {
 
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
-	const [firstUrl, setFirstUrl] = useState(
-		article.details.length >= 1 ? article.details[0].imageUrl : "",
-	);
-	const [secondUrl, setSecoundUrl] = useState(
-		article.details.length >= 2 ? article.details[1].imageUrl : "",
+	const [url, setUrl] = useState(
+		article.details.imageUrl !== "" ? article.details.imageUrl : "",
 	);
 
 	return (
@@ -66,15 +64,15 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 				{/* 募集内容 */}
 				<Box
 					sx={{
-						py: 2,
+						py: 1,
 						width: "100%",
 						justifyContent: "space-around",
 						display: { md: "flex" },
 					}}
 				>
-					{firstUrl !== "" && (
+					{url !== "" && (
 						<Link
-							href={`/list/${article.details[0].id}`}
+							href={`/list/${article.details.id}`}
 							passHref
 							style={{ width: "40%" }}
 							target="_blank"
@@ -85,17 +83,16 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 									width: "100%",
 									height: { md: 80, xs: 60 },
 									cursor: "pointer",
-									mb: { md: 0, xs: 2 },
-									border: "1px solid #00000060",
+									// border: "1px solid #00000060",
 									alignItems: "center",
 									gap: 2,
-									borderRadius: "6px",
+									// borderRadius: "6px",
 									"&:hover": {
 										opacity: "0.7",
 									},
 								}}
 							>
-								<Box
+								{/* <Box
 									sx={{
 										width: { md: 80, xs: 60 },
 										height: { md: 80, xs: 60 },
@@ -103,95 +100,76 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 									}}
 								>
 									<Image
-										src={firstUrl}
+										src={url}
 										fill
 										style={{
 											borderRadius: "6px 0 0 6px",
 										}}
 										alt="Picture of the author"
 										onError={() => {
-											setFirstUrl("/no_images.jpg");
+											setUrl("/no_images.jpg");
 										}}
 									/>
-								</Box>
+								</Box> */}
 
 								<Box>
-									<Typography sx={{ fontWeight: "bold" }}>
-										{article.details[0].title}
+									<Typography
+										sx={{
+											overflow: "hidden",
+											WebkitBoxOrient: "vertical",
+											WebkitLineClamp: 2,
+											display: "-webkit-box",
+										}}
+									>
+										{article.details.body}
 									</Typography>
-									<Typography>￥{article.details[0].price}</Typography>
-								</Box>
-							</Box>
-						</Link>
-					)}
-					{secondUrl !== "" && (
-						<Link
-							href={`/list/${article.details[1].id}`}
-							passHref
-							style={{ width: "40%" }}
-							target="_blank"
-						>
-							<Box
-								sx={{
-									display: "flex",
-									width: "100%",
-									cursor: "pointer",
-									mb: { md: 0, xs: 2 },
-									height: { md: 80, xs: 60 },
-									border: "1px solid #00000060",
-									alignItems: "center",
-									gap: 2,
-									borderRadius: "6px",
-									"&:hover": {
-										opacity: "0.7",
-									},
-								}}
-							>
-								<Box
-									sx={{
-										width: { md: 80, xs: 60 },
-										height: { md: 80, xs: 60 },
-										position: "relative",
-									}}
-								>
-									<Image
-										src={secondUrl}
-										fill
-										style={{
-											borderRadius: "6px 0 0 6px",
-										}}
-										alt="Picture of the author"
-										onError={() => {
-											setSecoundUrl("/no_images.jpg");
-										}}
-									/>
-								</Box>
 
-								<Box>
-									<Typography sx={{ fontWeight: "bold" }}>
-										{article.details[1].title}
-									</Typography>
-									<Typography>￥{article.details[1].price}</Typography>
+									{/* <Typography>￥{article.details.price}</Typography> */}
 								</Box>
 							</Box>
 						</Link>
 					)}
 				</Box>
+
 				<Box
 					sx={{
 						display: "flex",
 						color: "#00000060",
 						alignItems: "center",
-						pt: 2,
+						justifyContent: "space-between",
+						gap: 1,
 					}}
 				>
-					<PlaceIcon sx={{ fontSize: "clamp(8px,1.2vw,1.2vw)" }} />
+					<Box
+						sx={{
+							display: "flex",
+							color: "#00000060",
+							alignItems: "center",
+						}}
+					>
+						<IconButton onClick={() => {}} sx={{ px: 0 }}>
+							<FavoriteIcon sx={{ fontSize: "clamp(16px,1.4vw,1.4vw)" }} />
+						</IconButton>
+						<Typography sx={{ fontSize: "clamp(16px,1.4vw,1.4vw)" }}>
+							{100}
+						</Typography>
+					</Box>
+					<Typography sx={{ fontSize: "clamp(12px,1.2vw,1.2vw)" }}>
+						{"2022/12/05 ~ 2023/01/05"}
+					</Typography>
+					<Button
+						sx={{ fontSize: "clamp(16px,1.4vw,1.4vw)" }}
+						variant="outlined"
+					>
+						詳細
+					</Button>
+					{/* <PlaceIcon sx={{ fontSize: "clamp(8px,1.2vw,1.2vw)" }} />
 					{article.places.map((item, idx) => (
 						<Typography key={item} sx={{ fontSize: "clamp(8px,1.2vw,12px)" }}>
 							{item}
 							<span>{idx !== article.places.length - 1 ? " / " : ""}</span>
 						</Typography>
-					))}
+					))} */}
 				</Box>
 			</Box>
 		</>
