@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import PlaceIcon from "@mui/icons-material/Place";
 import { Box, Button, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Image from "next/image";
 import Link from "next/link";
-import { type FC, useState } from "react";
+import type { FC } from "react";
 
 type Props = {
 	article: TArticleItem;
@@ -14,9 +12,9 @@ type Props = {
 
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
-	const [url, setUrl] = useState(
-		article.details.imageUrl !== "" ? article.details.imageUrl : "",
-	);
+	// const [url, setUrl] = useState(
+	// 	article.details.imageUrl !== "" ? article.details.imageUrl : "",
+	// );
 
 	return (
 		<>
@@ -70,29 +68,28 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 						display: { md: "flex" },
 					}}
 				>
-					{url !== "" && (
-						<Link
-							href={`/list/${article.details.id}`}
-							passHref
-							style={{ width: "40%" }}
-							target="_blank"
+					<Link
+						href={`/list/${article.details.id}`}
+						passHref
+						style={{ width: "40%" }}
+						target="_blank"
+					>
+						<Box
+							sx={{
+								display: "flex",
+								width: "100%",
+								height: { md: 80, xs: 60 },
+								cursor: "pointer",
+								// border: "1px solid #00000060",
+								alignItems: "center",
+								gap: 2,
+								// borderRadius: "6px",
+								"&:hover": {
+									opacity: "0.7",
+								},
+							}}
 						>
-							<Box
-								sx={{
-									display: "flex",
-									width: "100%",
-									height: { md: 80, xs: 60 },
-									cursor: "pointer",
-									// border: "1px solid #00000060",
-									alignItems: "center",
-									gap: 2,
-									// borderRadius: "6px",
-									"&:hover": {
-										opacity: "0.7",
-									},
-								}}
-							>
-								{/* <Box
+							{/* <Box
 									sx={{
 										width: { md: 80, xs: 60 },
 										height: { md: 80, xs: 60 },
@@ -112,23 +109,22 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 									/>
 								</Box> */}
 
-								<Box>
-									<Typography
-										sx={{
-											overflow: "hidden",
-											WebkitBoxOrient: "vertical",
-											WebkitLineClamp: 2,
-											display: "-webkit-box",
-										}}
-									>
-										{article.details.body}
-									</Typography>
+							<Box>
+								<Typography
+									sx={{
+										overflow: "hidden",
+										WebkitBoxOrient: "vertical",
+										WebkitLineClamp: 2,
+										display: "-webkit-box",
+									}}
+								>
+									{article.details.body}
+								</Typography>
 
-									{/* <Typography>￥{article.details.price}</Typography> */}
-								</Box>
+								{/* <Typography>￥{article.details.price}</Typography> */}
 							</Box>
-						</Link>
-					)}
+						</Box>
+					</Link>
 				</Box>
 
 				<Box

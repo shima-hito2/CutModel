@@ -1,9 +1,9 @@
 "use client";
 
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
-import { Box, Pagination } from "@mui/material";
+import { Box } from "@mui/material";
 import type { FC } from "react";
-import { ArticleItem, ArticleSearchFilter } from "./components";
+import { ArticleItem } from "./components";
 
 const dummyData: TArticleItem[] = [
 	{
