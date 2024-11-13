@@ -12,9 +12,6 @@ type Props = {
 
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
-	// const [url, setUrl] = useState(
-	// 	article.details.imageUrl !== "" ? article.details.imageUrl : "",
-	// );
 
 	return (
 		<>

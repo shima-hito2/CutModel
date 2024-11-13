@@ -3,9 +3,9 @@ import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
 import PlaceIcon from "@mui/icons-material/Place";
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Image from "next/image";
-import Link from "next/link";
-import { type FC, useState } from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+import type { FC } from "react";
 
 type Props = {
 	article: TArticleItem;
@@ -13,12 +13,12 @@ type Props = {
 
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
-	const [firstUrl, setFirstUrl] = useState(
-		article.details.length >= 1 ? article.details[0].imageUrl : "",
-	);
-	const [secondUrl, setSecoundUrl] = useState(
-		article.details.length >= 2 ? article.details[1].imageUrl : "",
-	);
+	// const [firstUrl, setFirstUrl] = useState(
+	// 	article.details.length >= 1 ? article.details[0].imageUrl : "",
+	// );
+	// const [secondUrl, setSecoundUrl] = useState(
+	// 	article.details.length >= 2 ? article.details[1].imageUrl : "",
+	// );
 
 	return (
 		<>
@@ -64,7 +64,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					</Box>
 				</Box>
 				{/* 募集内容 */}
-				<Box
+				{/* <Box
 					sx={{
 						py: 2,
 						width: "100%",
@@ -176,7 +176,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 							</Box>
 						</Link>
 					)}
-				</Box>
+				</Box> */}
 				<Box
 					sx={{
 						display: "flex",
