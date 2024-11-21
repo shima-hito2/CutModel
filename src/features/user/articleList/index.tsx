@@ -9,7 +9,7 @@ const dummyData: TArticleItem[] = [
 	{
 		user: {
 			id: "1",
-			imageUrl: "",
+			imageUrl: "/no_images.jpg",
 			name: "テスト  太郎",
 			biography: "アシスタント2年",
 			strengths: "カットが得意です。",
