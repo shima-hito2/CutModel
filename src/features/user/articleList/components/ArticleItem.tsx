@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import Link from "next/link";
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
+import { ShareButton } from "./ShareButton";
 
 type Props = {
 	article: TArticleItem;
@@ -101,9 +102,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					{article.details.price}円
 				</p>
 				{/* 共有ボタン */}
-				<button style={buttonStyle}>
-					🔗 共有
-				</button>
+				<ShareButton />
 			</div>
 		</div>
 	);
@@ -120,6 +119,6 @@ const buttonStyle: React.CSSProperties = {
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
-	transition: 'all 0.3s ease', // ホバー時にアニメーション効果を追加
+	transition: 'all 0.3s ease',
 };
 
