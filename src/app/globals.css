@@ -4,7 +4,9 @@
 }
 
 body {
-  background-color: #eff7ff;
+  /* background-color: #eff7ff; */
+  background-color: #ffffff;
+  font-family:  Hiragino Kaku Gothic ProN, Helvetica Neue, Meiryo, sans-serif;
 }
 
 a {

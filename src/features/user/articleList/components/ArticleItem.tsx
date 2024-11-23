@@ -12,20 +12,36 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
 
 	return (
-		<div style={{ border: "1px solid #e0e0e0", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", backgroundColor: "white", margin: "16px", position: "relative" }}>
-			<div style={{
-				display: "flex",
-				justifyContent: "space-between",
-				alignItems: "center",
-				padding: "16px 16px 5px 16px",
-			}}>
+		<div style={{
+			border: "1px solid #e0e0e0",
+			borderRadius: "8px",
+			overflow: "hidden",
+			display: "flex",
+			flexDirection: "column",
+			backgroundColor: "white",
+			margin: "16px",
+			position: "relative",
+			boxShadow: "0 0 3px 2px #e3e3e3"
+		}}>
+			<Link href={`/hairdresser`} passHref target="_blank"
+				style={{
+					display: "flex",
+					justifyContent: "flex-start",
+					alignItems: "center",
+					padding: "16px 16px 5px 16px",
+				}}>
 				<img src={article.user.imageUrl} alt={article.user.name} style={{
 					borderRadius: "50%",
 					width: "50px",
 					height: "50px",
 					border: "1px solid #e0e0e0",
+					marginRight: "16px",
 				}} />
-				<div style={{ display: 'flex', justifyContent: 'space-between', width: '70%' }}>
+				<div style={{
+					display: 'flex',
+					flexDirection: 'column',
+					width: '70%'
+				}}>
 					<h3 style={{
 						margin: "0",
 						fontSize: "16px",
@@ -33,11 +49,14 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					}}>
 						{article.user.name}
 					</h3>
-					<p>
-						店舗名
+					<p style={{
+						fontSize: '12px',
+						color: '#666',
+					}}>
+						testsalon 堺筋本町店
 					</p>
 				</div>
-			</div>
+			</Link>
 			<Link href={`/list/${article.details.id}`} passHref target="_blank"
 				style={{
 					border: '1px solid #e0e0e0',
@@ -50,12 +69,12 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					position: 'relative',
 				}}>
 				<img
-					src={article.user.imageUrl}
+					src={article.details.imageUrl}
 					alt={article.user.name}
 					style={{
 						width: '100%',
-						aspectRatio: '16/9',
-						objectFit: 'fill',
+						aspectRatio: '5/6',
+						objectFit: 'cover',
 					}}
 				/>
 				{/* 画像の上に本文を重ねるためのスタイル */}

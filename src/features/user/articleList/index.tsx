@@ -9,14 +9,14 @@ const dummyData: TArticleItem[] = [
 	{
 		user: {
 			id: "1",
-			imageUrl: "/no_images.jpg",
+			imageUrl: "/kkrn_icon_user_1.png",
 			name: "テスト  太郎",
 			biography: "アシスタント2年",
 			strengths: "カットが得意です。",
 		},
 		details: {
 			id: "A",
-			imageUrl: "/user1.jpg",
+			imageUrl: "/cutmodel.jpg",
 			body: "募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容",
 			price: 6000,
 		},
