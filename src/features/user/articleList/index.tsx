@@ -17,7 +17,7 @@ const dummyData: TArticleItem[] = [
 		details: {
 			id: "A",
 			imageUrl: "/cutmodel.jpg",
-			body: "募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容募集内容",
+			body: "【メンズ限定クーポン】似合わせカット➕クレンジングシャンプー✨",
 			price: 6000,
 		},
 		places: ["○○駅徒歩5分", "○×駅徒歩10分", "×○駅徒歩12分", "××駅徒歩15分"],

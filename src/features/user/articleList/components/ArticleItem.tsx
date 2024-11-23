@@ -19,7 +19,6 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 			display: "flex",
 			flexDirection: "column",
 			backgroundColor: "white",
-			margin: "16px",
 			position: "relative",
 			boxShadow: "0 0 3px 2px #e3e3e3"
 		}}>
@@ -29,6 +28,8 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					justifyContent: "flex-start",
 					alignItems: "center",
 					padding: "16px 16px 5px 16px",
+					width: "80%",
+					margin: "0 auto",
 				}}>
 				<img src={article.user.imageUrl} alt={article.user.name} style={{
 					borderRadius: "50%",
@@ -57,6 +58,11 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					</p>
 				</div>
 			</Link>
+			<p style={{
+				width: '80%',
+				margin: '0 auto',
+				fontSize: '12px',
+			}}>テキストテキストテキストテキストテキスト</p>
 			<Link href={`/list/${article.details.id}`} passHref target="_blank"
 				style={{
 					border: '1px solid #e0e0e0',
@@ -64,16 +70,18 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					overflow: 'hidden',
 					display: 'flex',
 					flexDirection: 'column',
+					alignItems: 'center',
 					backgroundColor: 'white',
-					margin: '0 16px',
+					margin: '0 auto',
 					position: 'relative',
+					width: '80%',
 				}}>
 				<img
 					src={article.details.imageUrl}
 					alt={article.user.name}
 					style={{
 						width: '100%',
-						aspectRatio: '5/6',
+						aspectRatio: '8/9',
 						objectFit: 'cover',
 					}}
 				/>
