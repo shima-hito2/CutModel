@@ -7,7 +7,9 @@ export default function Layout({
 }) {
 	return (
 		<>
-			<Container maxWidth="md">{children}</Container>
+			<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
+				{children}
+			</Container>
 		</>
 	);
 }

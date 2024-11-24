@@ -2,7 +2,8 @@
 import type { FC } from "react";
 import Link from "next/link";
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
-import { ShareButton } from "./ShareButton";
+import { IconButton } from "@mui/material";
+import { FavoriteBorder } from "@mui/icons-material";
 
 type Props = {
 	article: TArticleItem;
@@ -11,10 +12,27 @@ type Props = {
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
 
+	interface HandleClickEvent extends React.MouseEvent<HTMLButtonElement> {
+		currentTarget: HTMLButtonElement & {
+			querySelector: (selectors: string) => SVGElement | null;
+		};
+	}
+
+	const handleClick = (event: HandleClickEvent): void => {
+		const icon = event.currentTarget.querySelector('svg');
+		if (icon) {
+			if (icon.style.color === 'red') {
+				icon.style.color = 'gray';
+			} else {
+				icon.style.color = 'red';
+			}
+		}
+	};
+
 	return (
 		<div style={{
 			border: "1px solid #e0e0e0",
-			borderRadius: "8px",
+			borderRadius: "4px",
 			overflow: "hidden",
 			display: "flex",
 			flexDirection: "column",
@@ -58,11 +76,18 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					</p>
 				</div>
 			</Link>
-			<p style={{
-				width: '80%',
-				margin: '0 auto',
-				fontSize: '12px',
-			}}>テキストテキストテキストテキストテキスト</p>
+			<Link href={`/list/${article.details.id}`} passHref target="_blank"
+				style={{
+					width: '80%',
+					margin: '0 auto 12px auto',
+					fontSize: '12px',
+					display: '-webkit-box',
+					WebkitBoxOrient: 'vertical',
+					WebkitLineClamp: 3,
+					overflow: 'hidden',
+				}}>
+				【期間限定価格】韓国風🇰🇷透明感カラー+動きのあるレイヤーカット+オリジナルトリートメント+コテ巻き仕上げ🤍
+			</Link>
 			<Link href={`/list/${article.details.id}`} passHref target="_blank"
 				style={{
 					border: '1px solid #e0e0e0',
@@ -81,7 +106,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					alt={article.user.name}
 					style={{
 						width: '100%',
-						aspectRatio: '8/9',
+						aspectRatio: '9/7',
 						objectFit: 'cover',
 					}}
 				/>
@@ -89,63 +114,69 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 				<div
 					style={{
 						position: 'absolute',
-						top: '75%',
+						top: '60%',
 						left: '0',
 						right: '0',
 						bottom: '0',
-						background: 'rgba(0, 0, 0, 0.1)',
+						background: 'rgba(0, 0, 0, 0.4)',
 						color: 'white',
-						padding: '10px',
+						padding: '10px 10px 0 10px',
 						display: 'flex',
-						alignItems: 'flex-end',
+						flexDirection: 'column',
+						alignItems: 'flex-start',
 						zIndex: '1',
 					}}
 				>
 					<p style={{
-						fontSize: '12px',
+						fontSize: '14px',
 						color: '#fff',
+						display: '-webkit-box',
+						WebkitBoxOrient: 'vertical',
+						WebkitLineClamp: 2,
 						overflow: 'hidden',
-						textOverflow: 'ellipsis',
-						whiteSpace: 'nowrap',
+						width: '90%',
+						margin: '0 auto',
 					}}>
 						{article.details.body}
 					</p>
 				</div>
+				<p style={{
+					position: 'absolute',
+					bottom: '5px',
+					right: '14px',
+					color: '#fff',
+					zIndex: '1',
+					fontSize: '18px',
+				}}>
+					6000円
+				</p>
+				<p style={{
+					position: 'absolute',
+					bottom: '10px',
+					left: '14px',
+					color: '#fff',
+					zIndex: '1',
+					fontSize: '12px',
+				}}>
+					2024/11/23まで
+				</p>
 			</Link>
 			<div style={{
-				padding: '16px',
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
+				width: '80%',
+				margin: '10px auto',
 			}}>
-				{/* お気に入りボタン */}
-				<button style={buttonStyle}>
-					❤️ お気に入り
-				</button>
-				<p style={{
-					margin: '0',
-					fontSize: '12px',
-				}}>
-					{article.details.price}円
-				</p>
-				{/* 共有ボタン */}
-				<ShareButton />
+				<IconButton onClick={handleClick}
+					style={{
+						padding: '0'
+					}}>
+					<FavoriteBorder />
+				</IconButton>
 			</div>
 		</div>
 	);
 };
 
-// ボタンのスタイル
-const buttonStyle: React.CSSProperties = {
-	backgroundColor: '#f0f0f0',
-	border: '1px solid #e0e0e0',
-	borderRadius: '20px',
-	padding: '8px 16px',
-	cursor: 'pointer',
-	fontSize: '14px',
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
-	transition: 'all 0.3s ease',
-};
 
