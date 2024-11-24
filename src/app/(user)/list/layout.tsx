@@ -7,7 +7,11 @@ export default function Layout({
 }) {
 	return (
 		<>
-			<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
+			<Container maxWidth="md" sx={{
+				paddingLeft: 0,
+				paddingRight: 0,
+				marginTop: { xs: "60px", md: 0 },
+			}}>
 				{children}
 			</Container>
 		</>
