@@ -2,8 +2,12 @@
 import type { FC } from "react";
 import Link from "next/link";
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
-import { IconButton } from "@mui/material";
-import { FavoriteBorder } from "@mui/icons-material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton } from "@mui/material";
+import { FavoriteBorder, Link as LinkIcon } from "@mui/icons-material";
+import ShareIcon from "@mui/icons-material/Share";
+import React from "react";
+import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { FacebookIcon, XIcon } from "react-share";
 
 type Props = {
 	article: TArticleItem;
@@ -12,21 +16,32 @@ type Props = {
 export const ArticleItem: FC<Props> = (props: Props) => {
 	const { article } = props;
 
-	interface HandleClickEvent extends React.MouseEvent<HTMLButtonElement> {
-		currentTarget: HTMLButtonElement & {
-			querySelector: (selectors: string) => SVGElement | null;
-		};
-	}
-
-	const handleClick = (event: HandleClickEvent): void => {
-		const icon = event.currentTarget.querySelector('svg');
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		const icon = event.currentTarget.querySelector("svg");
 		if (icon) {
-			if (icon.style.color === 'red') {
-				icon.style.color = 'gray';
+			if (icon.style.color === "red") {
+				icon.style.color = "gray";
 			} else {
-				icon.style.color = 'red';
+				icon.style.color = "red";
 			}
 		}
+	};
+
+
+	const [open, setOpen] = React.useState(false);
+	const [shareUrl, setShareUrl] = React.useState("");
+	const title = '共有するタイトル';
+
+	React.useEffect(() => {
+		setShareUrl(window.location.href);
+	}, []);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
 	};
 
 	return (
@@ -174,6 +189,77 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					}}>
 					<FavoriteBorder />
 				</IconButton>
+				<IconButton onClick={handleClickOpen}>
+					<ShareIcon />
+				</IconButton>
+
+				{shareUrl && (
+					<Dialog onClose={handleClose} open={open} fullWidth maxWidth="xs">
+						<DialogTitle>共有する</DialogTitle>
+						<DialogContent dividers>
+							<Grid container spacing={2}>
+								<Grid item xs={12}>
+									<FacebookShareButton url={shareUrl} style={{ width: "100%" }}>
+										<Button
+											variant="contained"
+											color="primary"
+											startIcon={<FacebookIcon size={24} round />}
+											fullWidth
+										>
+											Facebookで共有
+										</Button>
+									</FacebookShareButton>
+								</Grid>
+								<Grid item xs={12}>
+									<TwitterShareButton
+										url={shareUrl}
+										title={title}
+										style={{ width: "100%" }}
+									>
+										<Button
+											variant="contained"
+											color="primary"
+											startIcon={<XIcon size={24} round />}
+											fullWidth
+										>
+											Xで共有
+										</Button>
+									</TwitterShareButton>
+								</Grid>
+								<Grid item xs={12}>
+									<Button
+										variant="contained"
+										color="primary"
+										startIcon={<LinkIcon />}
+										fullWidth
+										onClick={() => {
+											if (navigator.clipboard && shareUrl) {
+												navigator.clipboard.writeText(shareUrl).then(
+													() => {
+														alert("リンクをコピーしました。");
+													},
+													(err) => {
+														alert("リンクのコピーに失敗しました。");
+														console.error(err);
+													}
+												);
+											} else {
+												alert("クリップボードにアクセスできません。");
+											}
+										}}
+									>
+										リンクをコピー
+									</Button>
+								</Grid>
+							</Grid>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={handleClose} color="primary">
+								閉じる
+							</Button>
+						</DialogActions>
+					</Dialog>
+				)}
 			</div>
 		</div>
 	);
