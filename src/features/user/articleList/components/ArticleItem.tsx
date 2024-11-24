@@ -2,12 +2,20 @@
 import type { FC } from "react";
 import Link from "next/link";
 import type { ArticleItem as TArticleItem } from "@/app/type/articleItem";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton } from "@mui/material";
+import {
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	IconButton,
+} from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { FavoriteBorder, Link as LinkIcon } from "@mui/icons-material";
 import ShareIcon from "@mui/icons-material/Share";
 import React from "react";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
-import { FacebookIcon, XIcon } from "react-share";
+import { LineIcon, XIcon } from "react-share";
 
 type Props = {
 	article: TArticleItem;
@@ -19,18 +27,13 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		const icon = event.currentTarget.querySelector("svg");
 		if (icon) {
-			if (icon.style.color === "red") {
-				icon.style.color = "gray";
-			} else {
-				icon.style.color = "red";
-			}
+			icon.style.color = icon.style.color === "red" ? "#B0BEC5" : "#FF4081"; // 赤からピンクに変更
 		}
 	};
 
-
 	const [open, setOpen] = React.useState(false);
 	const [shareUrl, setShareUrl] = React.useState("");
-	const title = '共有するタイトル';
+	const title = "共有するタイトル";
 
 	React.useEffect(() => {
 		setShareUrl(window.location.href);
@@ -45,16 +48,18 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 	};
 
 	return (
-		<div style={{
-			border: "1px solid #e0e0e0",
-			borderRadius: "4px",
-			overflow: "hidden",
-			display: "flex",
-			flexDirection: "column",
-			backgroundColor: "white",
-			position: "relative",
-			boxShadow: "0 0 3px 2px #e3e3e3"
-		}}>
+		<div
+			style={{
+				border: "1px solid #F8BBD0", // 柔らかいピンクの枠線
+				borderRadius: "12px", // 角を少し丸めて優しい印象に
+				overflow: "hidden",
+				display: "flex",
+				flexDirection: "column",
+				backgroundColor: "#FFF7F8", // ほんのりピンクがかった背景色
+				position: "relative",
+				boxShadow: "0 2px 6px rgba(243, 123, 152, 0.3)", // ピンクの影を少しつけて女性らしさを演出
+			}}
+		>
 			<Link href={`/hairdresser`} passHref target="_blank"
 				style={{
 					display: "flex",
@@ -68,7 +73,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					borderRadius: "50%",
 					width: "50px",
 					height: "50px",
-					border: "1px solid #e0e0e0",
+					border: "1px solid #FFCDD2", // 柔らかいピンクのボーダー
 					marginRight: "16px",
 				}} />
 				<div style={{
@@ -80,12 +85,13 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 						margin: "0",
 						fontSize: "16px",
 						fontWeight: "bold",
+						color: "#AD1457" // 柔らかいピンク系のフォント色
 					}}>
 						{article.user.name}
 					</h3>
 					<p style={{
 						fontSize: '12px',
-						color: '#666',
+						color: '#B0BEC5', // ソフトなグレー色
 					}}>
 						testsalon 堺筋本町店
 					</p>
@@ -100,13 +106,14 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					WebkitBoxOrient: 'vertical',
 					WebkitLineClamp: 3,
 					overflow: 'hidden',
+					color: '#AD1457', // リンクに柔らかいピンク系を適用
 				}}>
 				【期間限定価格】韓国風🇰🇷透明感カラー+動きのあるレイヤーカット+オリジナルトリートメント+コテ巻き仕上げ🤍
 			</Link>
 			<Link href={`/list/${article.details.id}`} passHref target="_blank"
 				style={{
-					border: '1px solid #e0e0e0',
-					borderRadius: '8px',
+					border: '1px solid #F8BBD0',
+					borderRadius: '12px',
 					overflow: 'hidden',
 					display: 'flex',
 					flexDirection: 'column',
@@ -125,7 +132,6 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 						objectFit: 'cover',
 					}}
 				/>
-				{/* 画像の上に本文を重ねるためのスタイル */}
 				<div
 					style={{
 						position: 'absolute',
@@ -133,7 +139,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 						left: '0',
 						right: '0',
 						bottom: '0',
-						background: 'rgba(0, 0, 0, 0.4)',
+						background: 'rgba(255, 64, 129, 0.5)', // ピンクがかったオーバーレイ
 						color: 'white',
 						padding: '10px 10px 0 10px',
 						display: 'flex',
@@ -162,6 +168,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 					color: '#fff',
 					zIndex: '1',
 					fontSize: '18px',
+					fontWeight: 'bold',
 				}}>
 					6000円
 				</p>
@@ -185,12 +192,13 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 			}}>
 				<IconButton onClick={handleClick}
 					style={{
-						padding: '0'
+						padding: '0',
+						color: '#FF4081' // ピンク色に設定
 					}}>
 					<FavoriteBorder />
 				</IconButton>
 				<IconButton onClick={handleClickOpen}>
-					<ShareIcon />
+					<ShareIcon style={{ color: '#FF4081' }} />
 				</IconButton>
 
 				{shareUrl && (
@@ -202,11 +210,11 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 									<FacebookShareButton url={shareUrl} style={{ width: "100%" }}>
 										<Button
 											variant="contained"
-											color="primary"
-											startIcon={<FacebookIcon size={24} round />}
+											color="secondary" // 柔らかい色を選択
+											startIcon={<LineIcon size={24} round />}
 											fullWidth
 										>
-											Facebookで共有
+											LINEで共有
 										</Button>
 									</FacebookShareButton>
 								</Grid>
@@ -218,7 +226,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 									>
 										<Button
 											variant="contained"
-											color="primary"
+											color="secondary"
 											startIcon={<XIcon size={24} round />}
 											fullWidth
 										>
@@ -229,7 +237,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 								<Grid item xs={12}>
 									<Button
 										variant="contained"
-										color="primary"
+										color="secondary"
 										startIcon={<LinkIcon />}
 										fullWidth
 										onClick={() => {
@@ -254,7 +262,7 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 							</Grid>
 						</DialogContent>
 						<DialogActions>
-							<Button onClick={handleClose} color="primary">
+							<Button onClick={handleClose} color="secondary">
 								閉じる
 							</Button>
 						</DialogActions>
@@ -264,5 +272,3 @@ export const ArticleItem: FC<Props> = (props: Props) => {
 		</div>
 	);
 };
-
-
