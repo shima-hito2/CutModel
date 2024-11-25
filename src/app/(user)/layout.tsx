@@ -11,15 +11,17 @@ export default function Layout({
 		// biome-ignore lint/a11y/useHtmlLang: <explanation>
 		<html>
 			<body>
-				<Box sx={{
-					display: { md: "block", xs: "block" },
-					position: { xs: "fixed" },
-					top: { xs: 0 },
-					left: { xs: 0 },
-					zIndex: { xs: 100 },
-					width: { xs: "100%" },
-					height: { xs: "60px" },
-				}}>
+				<Box
+					sx={{
+						display: { md: "block", xs: "none" },
+						position: { xs: "fixed" },
+						top: { xs: 0 },
+						left: { xs: 0 },
+						zIndex: { xs: 100 },
+						width: { xs: "100%" },
+						height: { xs: "60px" },
+					}}
+				>
 					<Header />
 				</Box>
 				{children}
