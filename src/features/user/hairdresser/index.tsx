@@ -1,13 +1,15 @@
 "use client";
 
 import { CustomTabPanel } from "@/features/common/myPage";
-import { Button, Tab, Tabs } from "@mui/material";
+import { Button, Dialog, DialogContent, Tab, Tabs } from "@mui/material";
 import Image from "next/image";
 import { type FC, useState } from "react";
 import { ArticleList } from "../articleList";
+import { PhotoList, Profile, Reviews } from "./components";
 
 export const Hairdresser: FC = () => {
 	const [value, setValue] = useState(0);
+	const [iconIsOpen, setIconIsOpen] = useState(false);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
@@ -32,11 +34,12 @@ export const Hairdresser: FC = () => {
 				</Button>
 				<Image
 					src={"/cutmodel.jpg"}
-					objectFit="contain"
+					// objectFit="contain"
 					alt="Picture of the author"
 					fill
 					style={{ objectFit: "cover" }} // オプション: 画像の表示方法を指定
 				/>
+				{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 				<div
 					style={{
 						position: "absolute",
@@ -44,6 +47,9 @@ export const Hairdresser: FC = () => {
 						left: 10,
 						width: 60,
 						height: 60,
+					}}
+					onClick={() => {
+						setIconIsOpen(true);
 					}}
 				>
 					<Image
@@ -145,15 +151,36 @@ export const Hairdresser: FC = () => {
 					<ArticleList />
 				</CustomTabPanel>
 				<CustomTabPanel value={value} index={1}>
-					<p>プロフィール</p>
+					<Profile />
 				</CustomTabPanel>
 				<CustomTabPanel value={value} index={2}>
-					<p>フォト</p>
+					<PhotoList />
 				</CustomTabPanel>
 				<CustomTabPanel value={value} index={3}>
-					<p>口コミ</p>
+					<Reviews />
 				</CustomTabPanel>
 			</div>
+			<Dialog
+				onClose={() => {
+					setIconIsOpen(false);
+				}}
+				open={iconIsOpen}
+			>
+				<div
+					style={{
+						width: 200,
+						height: 200,
+					}}
+				>
+					<Image
+						src={"/user1.jpg"}
+						objectFit="contain"
+						alt="Picture of the author"
+						fill
+						style={{ objectFit: "cover", borderRadius: "50%" }} // オプション: 画像の表示方法を指定
+					/>
+				</div>
+			</Dialog>
 		</>
 	);
 };

@@ -25,7 +25,7 @@ export default function Layout({
 					<Header />
 				</Box>
 				{children}
-				<Box sx={{ display: { md: "none", xs: "block" } }}>
+				<Box sx={{ display: { md: "none", xs: "block" }, mt: { xs: "56px" } }}>
 					<Footer />
 				</Box>
 			</body>
