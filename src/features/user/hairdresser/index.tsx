@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomTabPanel } from "@/features/common/myPage";
-import { Button, Dialog, DialogContent, Tab, Tabs } from "@mui/material";
+import { Button, Dialog, Tab, Tabs } from "@mui/material";
 import Image from "next/image";
 import { type FC, useState } from "react";
 import { ArticleList } from "../articleList";
