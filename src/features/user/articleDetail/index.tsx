@@ -2,7 +2,7 @@
 
 import Typography from "@mui/material/Typography";
 import { type FC, useState } from "react";
-import { Article, ReservationDialog, UserInfo } from "./components";
+import { Article, ReservationDialog, UserInfo, ShopCard, UserProfile } from "./components";
 
 export const ArticleDetail: FC = () => {
 	const [open, setOpen] = useState(false);
@@ -31,6 +31,8 @@ export const ArticleDetail: FC = () => {
 					setOpen(false);
 				}}
 			/>
+			<UserProfile />
+			<ShopCard />
 		</>
 	);
 };
